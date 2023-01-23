@@ -38,8 +38,8 @@ app.post("/api/create-checkout-session", async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: "http://localhost:8000/members/#card",
-    cancel_url: "http://localhost:5000/cancel",
+    success_url: "https://mapprojectmain.gatsbyjs.io/members/#card",
+    cancel_url: "https://mapprojectmain.gatsbyjs.io",
   });
   res.json({ id: session.id });
 });
