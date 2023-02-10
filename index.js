@@ -22,25 +22,29 @@ app.listen(5000, () => {
 });
 
 app.post("/api/create-checkout-session", async (req, res) => {
-  const { product } = req.body;
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    line_items: [
-      {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: product.name,
+  try {
+    const { product } = req.body;
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: product.name,
+            },
+            unit_amount: product.price * 100,
           },
-          unit_amount: product.price * 100,
+          quantity: product.quantity,
         },
-        quantity: product.quantity,
-      },
-    ],
-    mode: "payment",
-    success_url:
-      "https://lighthearted-starlight-22c325.netlify.app/members/#card",
-    cancel_url: "https://lighthearted-starlight-22c325.netlify.app",
-  });
-  res.json({ id: session.id });
+      ],
+      mode: "payment",
+      success_url:
+        "https://lighthearted-starlight-22c325.netlify.app/members/#card",
+      cancel_url: "https://lighthearted-starlight-22c325.netlify.app",
+    });
+    res.json({ message: "Payment successful", charge });
+  } catch (error) {
+    res.status(500).json({ message: "Payment failed", error });
+  }
 });
