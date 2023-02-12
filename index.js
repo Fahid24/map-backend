@@ -38,7 +38,7 @@ app.post("/api/create-checkout-session", async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: "http://localhost:8000/member-from-family/members/#card",
+    success_url: "http://localhost:8000/member-from-family",
     cancel_url: "https://lighthearted-starlight-22c325.netlify.app",
   });
   res.json({ id: session.id });
