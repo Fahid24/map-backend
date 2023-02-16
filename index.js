@@ -39,7 +39,7 @@ app.post("/api/create-checkout-session", async (req, res) => {
     ],
     mode: "payment",
     success_url:
-      "https://lighthearted-starlight-22c325.netlify.app/success-massege/",
+      "https://lighthearted-starlight-22c325.netlify.app/member-from/",
     cancel_url:
       "https://lighthearted-starlight-22c325.netlify.app/error-massege/",
   });
