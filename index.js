@@ -22,26 +22,22 @@ app.listen(5000, () => {
 });
 
 app.post("/api/create-checkout-session", async (req, res) => {
-  const { product } = req.body;
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    line_items: [
-      {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: product.name,
-          },
-          unit_amount: product.price * 100,
-        },
-        quantity: product.quantity,
-      },
-    ],
-    mode: "payment",
-    success_url:
-      "https://lighthearted-starlight-22c325.netlify.app/member-from/",
-    cancel_url:
-      "https://lighthearted-starlight-22c325.netlify.app/error-massege/",
-  });
-  res.json({ id: session.id });
+  const { token, amount, description, name } = req.body;
+  try {
+    const charge = await stripe.charges.create({
+      amount,
+      description,
+      name,
+      currency: "usd",
+      source: token.id,
+    });
+    res.json(charge);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .send(
+        "An error occurred while processing your payment. Please try again."
+      );
+  }
 });
