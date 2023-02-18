@@ -21,13 +21,11 @@ app.listen(5000, () => {
   console.log("Server started at port 5000");
 });
 
-app.post("/api/create-checkout-session", async (req, res) => {
-  const { token, amount, description, name } = req.body;
+app.post("/charge", async (req, res) => {
+  const { token, amount } = req.body;
   try {
     const charge = await stripe.charges.create({
       amount,
-      description,
-      name,
       currency: "usd",
       source: token.id,
     });
