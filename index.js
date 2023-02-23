@@ -26,7 +26,7 @@ app.post("/charge", async (req, res) => {
   try {
     const charge = await stripe.charges.create({
       amount,
-      currency: "usd",
+      currency: "aud",
       source: token.id,
     });
     res.json(charge);
