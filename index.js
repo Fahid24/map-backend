@@ -13,7 +13,7 @@ app.use(cors());
 
 // Routes here
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Marathi Association Perth");
 });
 
 // Listen
