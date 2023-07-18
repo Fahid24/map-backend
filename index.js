@@ -3,7 +3,9 @@ const express = require("express");
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")(
+  "sk_test_51Lcq7BLXHvCk9rLhWD8GgCOiyyKah7AULcQZISk7GuaSbW27DpP4JlQx7DGi1xpKOPAMvmp3poTIdOXswh6PIUTn0091tMJuqJ"
+);
 
 const app = express();
 
